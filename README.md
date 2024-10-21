@@ -1,7 +1,7 @@
-# EstruturaDadosLineares
+# Estruturas de dados
 Implementações realizadas nas disciplinas Estrutura de Dados Lineares (3° período) e Estruturas de Dados Não-lineares (4° período). Implementações podem não estar completas.
 
-## Estrutura de dados (3° período)
+## Estrutura de dados lineares (3° período)
 - [Pilha com array](pilha/pilha_array/pilha.java)
 
 - [Pilha com lista ligada](pilha/pilha_ll/Pilha.java)
