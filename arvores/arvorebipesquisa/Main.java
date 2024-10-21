@@ -33,6 +33,5 @@ class Main{
         System.out.println("---------------------");
         arvore.removeNode(node2);
         arvore.desenharArvore();
-        System.out.println(node5.getPai().getElemento());
     }
 }
