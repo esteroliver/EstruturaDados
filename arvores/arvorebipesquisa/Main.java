@@ -21,7 +21,8 @@ class Main{
         arvore.insertNode(node8);
         arvore.desenharArvore();
         System.out.println("---------------------");
-        arvore.removeNode(node2);
+        arvore.removeNode(node1);
+        System.out.println(arvore.isLeftChild(node5) + " " + arvore.isExternal(node5));
         arvore.desenharArvore();
     }
 }

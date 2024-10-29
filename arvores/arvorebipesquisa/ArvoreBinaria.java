@@ -123,22 +123,26 @@ class ArvoreBinaria {
             No node_pai = node_removed.getPai();
             if(isLeftChild(node_removed)){
                 if(node_removed.getFilho_direita() != null){
-                    node_pai.setFilho_esquerda(node_removed.getFilho_direita());
+                    if(node_removed != raiz) node_pai.setFilho_esquerda(node_removed.getFilho_direita());
                     node_removed.getFilho_direita().setPai(node_pai);
+                    if(node_removed == raiz) raiz = node_removed.getFilho_direita();
                 }
                 else{
-                    node_pai.setFilho_esquerda(node_removed.getFilho_esquerda());
+                    if(node_removed != raiz) node_pai.setFilho_esquerda(node_removed.getFilho_esquerda());
                     node_removed.getFilho_esquerda().setPai(node_pai);
+                    if(node_removed == raiz) raiz = node_removed.getFilho_esquerda();
                 }
             }
             else{
                 if(node_removed.getFilho_direita() != null){
-                    node_pai.setFilho_direita(node_removed.getFilho_direita());
+                    if(node_removed != raiz) node_pai.setFilho_direita(node_removed.getFilho_direita());
                     node_removed.getFilho_direita().setPai(node_pai);
+                    if(node_removed == raiz) raiz = node_removed.getFilho_direita();
                 }
                 else{
-                    node_pai.setFilho_direita(node_removed.getFilho_esquerda());
+                    if(node_removed != raiz) node_pai.setFilho_direita(node_removed.getFilho_esquerda());
                     node_removed.getFilho_esquerda().setPai(node_pai);
+                    if(node_removed == raiz) raiz = node_removed.getFilho_esquerda();
                 }
             }
             tam--;
@@ -169,14 +173,21 @@ class ArvoreBinaria {
                 node_sub.setFilho_direita(node_removed.getFilho_direita());
                 node_removed.getFilho_direita().setPai(node_sub);
             }
-            node_sub.setPai(node_pai);
             node_sub.setFilho_esquerda(node_removed.getFilho_esquerda());
             node_removed.getFilho_esquerda().setPai(node_sub);
-            if(isLeftChild(node_removed)){
-                node_pai.setFilho_esquerda(node_sub);
+            if(node_removed != raiz){
+                if(isLeftChild(node_removed)){
+                    node_pai.setFilho_esquerda(node_sub);
+                }
+                else{
+                    node_pai.setFilho_direita(node_sub);
+                }
+            }
+            if(node_removed != raiz){
+                node_sub.setPai(node_pai);
             }
             else{
-                node_pai.setFilho_direita(node_sub);
+                raiz = node_sub;
             }
             node_removed.setPai(null);
             tam--;
@@ -185,8 +196,9 @@ class ArvoreBinaria {
     private void leftChildLeaf(No o){
         if(isInternal(o) && o.getFilho_esquerda() != null){
             leftChildLeaf(o.getFilho_esquerda());
+            return;
         }
-        if((isLeftChild(o) && isExternal(o) || (isLeftChild(o) && hasRightChild(o) && !hasLeftChild(o)))){
+        if((isLeftChild(o) && isExternal(o)) || (isLeftChild(o) && hasRightChild(o) && !hasLeftChild(o))){
             no_inorder = o;
             return;
         }
