@@ -90,28 +90,38 @@ class ArvoreAvl {
         if(estaVazio()){
             raiz = node;
             tamanho++;
+            raiz.setBalanceamento(0);
         }
         else{
             No aux = raiz;
             while(node.getPai() == null){
                 if(node.getElemento() > aux.getElemento()){
-                    if(temFilhoDireito(aux)) aux = aux.getFilho_direita();
+                    Integer fb = aux.getBalanceamento() - 1;
+                    aux.setBalanceamento(fb);
+                    if(temFilhoDireito(aux)){
+                        aux = aux.getFilho_direita();
+                    }
                     else{
                         aux.setFilho_direita(node);
                         node.setPai(aux);
-                        //verificar balanceamento
+                        node.setBalanceamento(0);
                     }
                 }
                 if(node.getElemento() < aux.getElemento()){
-                    if(temFilhoEsquerdo(aux)) aux = aux.getFilho_esquerda();
+                    Integer fb = aux.getBalanceamento() + 1;
+                    aux.setBalanceamento(fb);
+                    if(temFilhoEsquerdo(aux)){
+                        aux = aux.getFilho_esquerda();
+                    }
                     else{
                         aux.setFilho_esquerda(node);
                         node.setPai(aux);
-                        //verificar balanceamento
+                        node.setBalanceamento(0);
                     }
                 }
             }
             tamanho++;
         }
+        //verificar balanceamento
     }
 }
