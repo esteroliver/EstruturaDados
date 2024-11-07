@@ -3,6 +3,7 @@ class No {
     private No pai;
     private No filho_direita;
     private No filho_esquerda;
+    private Integer balanceamento;
     public No(){
 
     }
@@ -11,6 +12,7 @@ class No {
         pai = null;
         filho_direita = null;
         filho_esquerda = null;
+        balanceamento = 0;
     }
     public Integer getElemento() {
         return elemento;
@@ -41,5 +43,11 @@ class No {
             return true;
         }
         return false;
+    }
+    public Integer getBalanceamento() {
+        return balanceamento;
+    }
+    public void setBalanceamento(Integer balanceamento) {
+        this.balanceamento = balanceamento;
     }
 }
