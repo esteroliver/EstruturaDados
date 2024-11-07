@@ -17,7 +17,7 @@ class Main{
         arvore.insertNode(node4);
         arvore.insertNode(node5);
         arvore.insertNode(node6);
-        //arvore.insertNode(node7);
+        arvore.insertNode(node7);
         arvore.insertNode(node8);
         arvore.desenharArvore();
         System.out.println("---------------------");
