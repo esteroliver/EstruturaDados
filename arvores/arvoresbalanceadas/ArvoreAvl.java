@@ -1,10 +1,38 @@
 class ArvoreAvl {
     private No raiz;
+    private No desbalanceado;
     private Integer tamanho;
 
     public ArvoreAvl(){
         tamanho = 0;
         raiz = new No();
+        desbalanceado = new No();
+    }
+
+    private void rotacaoEsquerda(No node){
+        No novo_pai = node.getFilho_esquerda();
+        novo_pai.setPai(node.getPai());
+        if(novo_pai.getFilho_direita() == null)
+            novo_pai.setFilho_direita(node);
+        else{
+            node.setFilho_esquerda(novo_pai.getFilho_direita());
+            novo_pai.getFilho_direita().setPai(node);
+            novo_pai.setFilho_direita(node);
+        }
+        node.setPai(novo_pai);
+    }
+
+    private void rotacaoDireita(No node){
+        No novo_pai = node.getFilho_direita();
+        novo_pai.setPai(node.getPai());
+        if(novo_pai.getFilho_esquerda() == null)
+            novo_pai.setFilho_esquerda(node);
+        else{
+            node.setFilho_direita(novo_pai.getFilho_esquerda());
+            novo_pai.getFilho_esquerda().setPai(node);
+            novo_pai.setFilho_esquerda(node);
+        }
+        node.setPai(novo_pai);
     }
 
     public Integer tamanho(){
@@ -98,6 +126,9 @@ class ArvoreAvl {
                 if(node.getElemento() > aux.getElemento()){
                     Integer fb = aux.getBalanceamento() - 1;
                     aux.setBalanceamento(fb);
+                    if(aux.getBalanceamento() >= 2 || aux.getBalanceamento() <= -2){
+                        desbalanceado = aux;
+                    }
                     if(temFilhoDireito(aux)){
                         aux = aux.getFilho_direita();
                     }
@@ -110,6 +141,9 @@ class ArvoreAvl {
                 if(node.getElemento() < aux.getElemento()){
                     Integer fb = aux.getBalanceamento() + 1;
                     aux.setBalanceamento(fb);
+                    if(aux.getBalanceamento() >= 2 || aux.getBalanceamento() <= -2){
+                        desbalanceado = aux;
+                    }
                     if(temFilhoEsquerdo(aux)){
                         aux = aux.getFilho_esquerda();
                     }
@@ -122,6 +156,6 @@ class ArvoreAvl {
             }
             tamanho++;
         }
-        //verificar balanceamento
+        //balanceamento
     }
 }
