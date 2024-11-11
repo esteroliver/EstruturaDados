@@ -12,9 +12,8 @@ class Main{
         arvore.inserirNo(node2);
         arvore.inserirNo(node3);
         arvore.inserirNo(node4);
-        arvore.inserirNo(node5);
-
-        arvore.altura(node1);
+        //arvore.inserirNo(node5);
+        System.out.println(arvore.altura(node1));
 
         arvore.desenharArvore();
     }

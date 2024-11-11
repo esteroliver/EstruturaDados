@@ -101,14 +101,13 @@ class ArvoreAvl {
     }
 
     public Integer altura(No node){
-        if(node == null) return 0;
-        else if(node != null && noExterno(node)) return 0;
+        if(noExterno(node)) return 0;
         else{
             Integer h_e = 0;
             Integer h_d = 0;
             Integer h = 0;
-            h_e = altura(node.getFilho_esquerda()) + 1;
-            h_d = altura(node.getFilho_direita()) + 1;
+            if(node.getFilho_esquerda() != null) h_e = altura(node.getFilho_esquerda()) + 1;
+            if(node.getFilho_direita() != null) h_d = altura(node.getFilho_direita()) + 1;
             h = h_e;
             if(h_d > h_e) h = h_d;
             return h;
@@ -122,7 +121,7 @@ class ArvoreAvl {
 
     public void inserirNo(No node){
         if(estaVazio()){
-            raiz.setElemento(node.getElemento());
+            raiz = node;
             tamanho++;
         }
         else{
@@ -196,8 +195,7 @@ class ArvoreAvl {
         Integer k = 0;
         for(No node : nodes){
             matriz[profundidade(node)][k] = node.getElemento();
-            k++;
-            
+            k++;  
         }
         for(int i = 0; i <= altura; i++){
             for(int j = 0; j < tamanho(); j++){
