@@ -156,6 +156,19 @@ class ArvoreAvl {
             }
             tamanho++;
         }
-        //balanceamento
+        if(desbalanceado != null){
+            if(desbalanceado.getBalanceamento() == 2){
+                if(desbalanceado.getFilho_esquerda().getBalanceamento() < 0){
+                    rotacaoEsquerda(desbalanceado.getFilho_esquerda());
+                }
+                rotacaoDireita(desbalanceado);
+            }
+            else{
+                if(desbalanceado.getFilho_direita().getBalanceamento > 0){
+                    rotacaoDireita(desbalanceado.getFilho_direita())
+                }
+                rotacaoEsquerda(desbalanceado);
+            }
+        }
     }
 }
