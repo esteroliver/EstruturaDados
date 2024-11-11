@@ -114,7 +114,7 @@ class ArvoreAvl {
         return profundidade(node.getPai()) + 1;
     }
 
-    public Void inserirNo(No node){
+    public void inserirNo(No node){
         if(estaVazio()){
             raiz = node;
             tamanho++;
@@ -164,8 +164,8 @@ class ArvoreAvl {
                 rotacaoDireita(desbalanceado);
             }
             else{
-                if(desbalanceado.getFilho_direita().getBalanceamento > 0){
-                    rotacaoDireita(desbalanceado.getFilho_direita())
+                if(desbalanceado.getFilho_direita().getBalanceamento() > 0){
+                    rotacaoDireita(desbalanceado.getFilho_direita());
                 }
                 rotacaoEsquerda(desbalanceado);
             }
