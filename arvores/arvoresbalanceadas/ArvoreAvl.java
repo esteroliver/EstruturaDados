@@ -126,7 +126,7 @@ class ArvoreAvl {
                 if(node.getElemento() > aux.getElemento()){
                     Integer fb = aux.getBalanceamento() - 1;
                     aux.setBalanceamento(fb);
-                    if(aux.getBalanceamento() >= 2 || aux.getBalanceamento() <= -2){
+                    if(aux.getBalanceamento() == 2 || aux.getBalanceamento() == -2){
                         desbalanceado = aux;
                     }
                     if(temFilhoDireito(aux)){
@@ -156,7 +156,7 @@ class ArvoreAvl {
             }
             tamanho++;
         }
-        if(desbalanceado != null){
+        if(desbalanceado.getBalanceamento() == 2 || desbalanceado.getBalanceamento() == -2){
             if(desbalanceado.getBalanceamento() == 2){
                 if(desbalanceado.getFilho_esquerda().getBalanceamento() < 0){
                     rotacaoEsquerda(desbalanceado.getFilho_esquerda());
