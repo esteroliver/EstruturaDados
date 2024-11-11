@@ -5,7 +5,11 @@ class No {
     private No filho_esquerda;
     private Integer balanceamento;
     public No(){
-
+        elemento = null;
+        pai = null;
+        filho_direita = null;
+        filho_esquerda = null;
+        balanceamento = 0;
     }
     public No(Integer elemento) {
         this.elemento = elemento;

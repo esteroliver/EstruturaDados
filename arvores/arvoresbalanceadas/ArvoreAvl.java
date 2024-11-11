@@ -1,12 +1,17 @@
+import java.util.ArrayList;
+
 class ArvoreAvl {
     private No raiz;
     private No desbalanceado;
     private Integer tamanho;
 
+    private ArrayList<No> nos;
+
     public ArvoreAvl(){
         tamanho = 0;
         raiz = new No();
         desbalanceado = new No();
+        desbalanceado.setBalanceamento(null);
     }
 
     private void rotacaoEsquerda(No node){
@@ -96,7 +101,8 @@ class ArvoreAvl {
     }
 
     public Integer altura(No node){
-        if(noExterno(node) || node == null) return 0;
+        if(node == null) return 0;
+        else if(node != null && noExterno(node)) return 0;
         else{
             Integer h_e = 0;
             Integer h_d = 0;
@@ -116,9 +122,8 @@ class ArvoreAvl {
 
     public void inserirNo(No node){
         if(estaVazio()){
-            raiz = node;
+            raiz.setElemento(node.getElemento());
             tamanho++;
-            raiz.setBalanceamento(0);
         }
         else{
             No aux = raiz;
@@ -135,7 +140,6 @@ class ArvoreAvl {
                     else{
                         aux.setFilho_direita(node);
                         node.setPai(aux);
-                        node.setBalanceamento(0);
                     }
                 }
                 if(node.getElemento() < aux.getElemento()){
@@ -150,13 +154,12 @@ class ArvoreAvl {
                     else{
                         aux.setFilho_esquerda(node);
                         node.setPai(aux);
-                        node.setBalanceamento(0);
                     }
                 }
             }
             tamanho++;
         }
-        if(desbalanceado.getBalanceamento() == 2 || desbalanceado.getBalanceamento() == -2){
+        if(desbalanceado.getBalanceamento() != null){
             if(desbalanceado.getBalanceamento() == 2){
                 if(desbalanceado.getFilho_esquerda().getBalanceamento() < 0){
                     rotacaoEsquerda(desbalanceado.getFilho_esquerda());
@@ -169,6 +172,45 @@ class ArvoreAvl {
                 }
                 rotacaoEsquerda(desbalanceado);
             }
+        }
+    }
+
+    private void inOrderNos(No node){
+        if(noInterno(node) && node.getFilho_esquerda() != null)
+            inOrderNos(node.getFilho_esquerda());
+        nos.add(node);
+        if(noInterno(node) && node.getFilho_direita() != null)
+            inOrderNos(node.getFilho_direita());
+    }
+
+    private ArrayList<No> inOrderNosArray(){
+        nos = new ArrayList<No>();
+        inOrderNos(raiz);
+        return nos;
+    }
+
+    public void desenharArvore(){
+        Integer altura = altura(raiz);
+        Integer[][] matriz = new Integer[altura+1][tamanho()];
+        ArrayList<No> nodes = inOrderNosArray();
+        Integer k = 0;
+        for(No node : nodes){
+            matriz[profundidade(node)][k] = node.getElemento();
+            k++;
+            
+        }
+        for(int i = 0; i <= altura; i++){
+            for(int j = 0; j < tamanho(); j++){
+                Integer print;
+                if(matriz[i][j] == null)
+                    System.out.print(" ");
+                
+                else
+                    System.out.print(matriz[i][j]);
+                
+                System.out.print(" ");
+            }
+            System.out.println();
         }
     }
 }
