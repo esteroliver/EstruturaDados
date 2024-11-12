@@ -5,6 +5,7 @@ class Main{
         No node3 = new No(15);
         No node4 = new No(33);
         No node5 = new No(24);
+        No node6 = new No(36);
 
         ArvoreAvl arvore = new ArvoreAvl();
 
@@ -12,8 +13,9 @@ class Main{
         arvore.inserirNo(node2);
         arvore.inserirNo(node3);
         arvore.inserirNo(node4);
-        //arvore.inserirNo(node5);
-        System.out.println(arvore.altura(node1));
+        arvore.inserirNo(node5);
+        arvore.inserirNo(node6);
+        System.out.println(node1.getBalanceamento());
 
         arvore.desenharArvore();
     }

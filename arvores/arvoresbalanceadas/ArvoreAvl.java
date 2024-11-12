@@ -128,11 +128,6 @@ class ArvoreAvl {
             No aux = raiz;
             while(node.getPai() == null){
                 if(node.getElemento() > aux.getElemento()){
-                    Integer fb = aux.getBalanceamento() - 1;
-                    aux.setBalanceamento(fb);
-                    if(aux.getBalanceamento() == 2 || aux.getBalanceamento() == -2){
-                        desbalanceado = aux;
-                    }
                     if(temFilhoDireito(aux)){
                         aux = aux.getFilho_direita();
                     }
@@ -142,12 +137,7 @@ class ArvoreAvl {
                     }
                 }
                 if(node.getElemento() < aux.getElemento()){
-                    Integer fb = aux.getBalanceamento() + 1;
-                    aux.setBalanceamento(fb);
-                    if(aux.getBalanceamento() >= 2 || aux.getBalanceamento() <= -2){
-                        desbalanceado = aux;
-                    }
-                    if(temFilhoEsquerdo(aux)){
+                     if(temFilhoEsquerdo(aux)){
                         aux = aux.getFilho_esquerda();
                     }
                     else{
@@ -158,6 +148,26 @@ class ArvoreAvl {
             }
             tamanho++;
         }
+        No vec = node;
+        while(vec != null){
+            if(temFilhoDireito(vec) && !temFilhoEsquerdo(vec)){
+                Integer fb = vec.getBalanceamento() - 1;
+                vec.setBalanceamento(fb);
+            }
+            else if(!temFilhoDireito(vec) && temFilhoEsquerdo(vec)){
+                Integer fb = vec.getBalanceamento() + 1;
+                vec.setBalanceamento(fb);
+            }
+            else if(temFilhoDireito(vec) && temFilhoEsquerdo(vec)){
+                Integer fb = vec.getBalanceamento() - vec.getFilho_direita().getBalanceamento() + vec.getFilho_esquerda().getBalanceamento();
+                vec.setBalanceamento(fb);
+            }
+            if(vec.getBalanceamento() == 2 || vec.getBalanceamento() == -2){
+                desbalanceado = vec;
+            }
+            vec = vec.getPai();
+        }
+
         if(desbalanceado.getBalanceamento() != null){
             if(desbalanceado.getBalanceamento() == 2){
                 if(desbalanceado.getFilho_esquerda().getBalanceamento() < 0){
