@@ -15,19 +15,6 @@ class ArvoreAvl {
     }
 
     private void rotacaoEsquerda(No node){
-        No novo_pai = node.getFilho_esquerda();
-        novo_pai.setPai(node.getPai());
-        if(novo_pai.getFilho_direita() == null)
-            novo_pai.setFilho_direita(node);
-        else{
-            node.setFilho_esquerda(novo_pai.getFilho_direita());
-            novo_pai.getFilho_direita().setPai(node);
-            novo_pai.setFilho_direita(node);
-        }
-        node.setPai(novo_pai);
-    }
-
-    private void rotacaoDireita(No node){
         No novo_pai = node.getFilho_direita();
         novo_pai.setPai(node.getPai());
         if(novo_pai.getFilho_esquerda() == null)
@@ -38,6 +25,21 @@ class ArvoreAvl {
             novo_pai.setFilho_esquerda(node);
         }
         node.setPai(novo_pai);
+        if(node == raiz) raiz = novo_pai;
+    }
+
+    private void rotacaoDireita(No node){
+        No novo_pai = node.getFilho_esquerda();
+        novo_pai.setPai(node.getPai());
+        if(novo_pai.getFilho_direita() == null)
+            novo_pai.setFilho_direita(node);
+        else{
+            node.setFilho_esquerda(novo_pai.getFilho_direita());
+            novo_pai.getFilho_direita().setPai(node);
+            novo_pai.setFilho_direita(node);
+        }
+        node.setPai(novo_pai);
+        if(node == raiz) raiz = novo_pai;
     }
 
     public Integer tamanho(){
@@ -151,6 +153,7 @@ class ArvoreAvl {
                 while(aux != null){
                     Integer fb = aux.getBalanceamento() - 1;
                     aux.setBalanceamento(fb);
+                    if(aux.getBalanceamento() == -2 || aux.getBalanceamento() == 2) desbalanceado = aux;
                     if(aux.getBalanceamento() == 0) break;
                     aux = aux.getPai();
                 }
@@ -159,47 +162,28 @@ class ArvoreAvl {
                 while(aux != null){
                     Integer fb = aux.getBalanceamento() + 1;
                     aux.setBalanceamento(fb);
+                    if(aux.getBalanceamento() == -2 || aux.getBalanceamento() == 2) desbalanceado = aux;
                     if(aux.getBalanceamento() == 0) break;
                     aux = aux.getPai();
                 }
             }
         }
-/*
-        No vec = aux.getPai();
-        while(vec != null){
-            if(temFilhoDireito(vec) && temFilhoEsquerdo(vec)){
-                Integer fb = vec.getBalanceamento() - vec.getFilho_direita().getBalanceamento() + vec.getFilho_esquerda().getBalanceamento();
-                vec.setBalanceamento(fb);
-            }
-            else if(temFilhoDireito(vec)){
-                Integer fb = vec.getBalanceamento() - 1;
-                vec.setBalanceamento(fb);
-            }
-            else if(temFilhoEsquerdo(vec)){
-                Integer fb = vec.getBalanceamento() + 1;
-                vec.setBalanceamento(fb);
-            }
-            if(vec.getBalanceamento() == 2 || vec.getBalanceamento() == -2){
-                desbalanceado = vec;
-            }
-            vec = vec.getPai();
-        }
 
         if(desbalanceado.getBalanceamento() != null){
             if(desbalanceado.getBalanceamento() == 2){
-                if(desbalanceado.getFilho_esquerda().getBalanceamento() < 0){
+                if(desbalanceado.getFilho_esquerda().getBalanceamento() == -1){
                     rotacaoEsquerda(desbalanceado.getFilho_esquerda());
                 }
                 rotacaoDireita(desbalanceado);
             }
             else{
-                if(desbalanceado.getFilho_direita().getBalanceamento() > 0){
+                if(desbalanceado.getFilho_direita().getBalanceamento() == 1){
                     rotacaoDireita(desbalanceado.getFilho_direita());
                 }
                 rotacaoEsquerda(desbalanceado);
             }
+            desbalanceado = null;
         }
-*/
     }
 
     private void inOrderNos(No node){

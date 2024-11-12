@@ -15,7 +15,6 @@ class Main{
         arvore.inserirNo(node4);
         arvore.inserirNo(node5);
         arvore.inserirNo(node6);
-        System.out.println(node1.getBalanceamento());
 
         arvore.desenharArvore();
     }
