@@ -120,12 +120,12 @@ class ArvoreAvl {
     }
 
     public void inserirNo(No node){
+        No aux = raiz;
         if(estaVazio()){
             raiz = node;
             tamanho++;
         }
         else{
-            No aux = raiz;
             while(node.getPai() == null){
                 if(node.getElemento() > aux.getElemento()){
                     if(temFilhoDireito(aux)){
@@ -147,19 +147,36 @@ class ArvoreAvl {
                 }
             }
             tamanho++;
+            if(umFilhoDireita(node)){
+                while(aux != null){
+                    Integer fb = aux.getBalanceamento() - 1;
+                    aux.setBalanceamento(fb);
+                    if(aux.getBalanceamento() == 0) break;
+                    aux = aux.getPai();
+                }
+            }
+            else{
+                while(aux != null){
+                    Integer fb = aux.getBalanceamento() + 1;
+                    aux.setBalanceamento(fb);
+                    if(aux.getBalanceamento() == 0) break;
+                    aux = aux.getPai();
+                }
+            }
         }
-        No vec = node;
+/*
+        No vec = aux.getPai();
         while(vec != null){
-            if(temFilhoDireito(vec) && !temFilhoEsquerdo(vec)){
+            if(temFilhoDireito(vec) && temFilhoEsquerdo(vec)){
+                Integer fb = vec.getBalanceamento() - vec.getFilho_direita().getBalanceamento() + vec.getFilho_esquerda().getBalanceamento();
+                vec.setBalanceamento(fb);
+            }
+            else if(temFilhoDireito(vec)){
                 Integer fb = vec.getBalanceamento() - 1;
                 vec.setBalanceamento(fb);
             }
-            else if(!temFilhoDireito(vec) && temFilhoEsquerdo(vec)){
+            else if(temFilhoEsquerdo(vec)){
                 Integer fb = vec.getBalanceamento() + 1;
-                vec.setBalanceamento(fb);
-            }
-            else if(temFilhoDireito(vec) && temFilhoEsquerdo(vec)){
-                Integer fb = vec.getBalanceamento() - vec.getFilho_direita().getBalanceamento() + vec.getFilho_esquerda().getBalanceamento();
                 vec.setBalanceamento(fb);
             }
             if(vec.getBalanceamento() == 2 || vec.getBalanceamento() == -2){
@@ -182,6 +199,7 @@ class ArvoreAvl {
                 rotacaoEsquerda(desbalanceado);
             }
         }
+*/
     }
 
     private void inOrderNos(No node){
