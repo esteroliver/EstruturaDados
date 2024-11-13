@@ -195,6 +195,56 @@ class ArvoreAvl {
         }
     }
 
+    public void removerNo(No node){
+        if(noExterno(node)){
+            if(umFilhoEsquerdo(node)) node.getPai().setFilho_esquerda(null);
+            else if(umFilhoDireita(node)) node.getPai().setFilho_direita(null);
+            node = null;
+            tamanho--;
+        }
+        else if(node.oneChild()){
+            No node_pai = node.getPai();
+            if(node_pai != null){
+                No node_filho;
+                if(umFilhoEsquerdo(node)){
+                    if(temFilhoEsquerdo(node)){
+                        node_filho = node.getFilho_esquerda();
+                    }
+                    else{
+                        node_filho = node.getFilho_direita();
+                    }
+                    node_pai.setFilho_esquerda(node_filho);
+                    node_filho.setPai(node_pai);
+                }
+                else{
+                    if(temFilhoEsquerdo(node)){
+                        node_filho = node.getFilho_esquerda();
+                    }
+                    else{
+                        node_filho = node.getFilho_direita();
+                    }
+                    node_pai.setFilho_direita(node_filho);
+                    node_filho.setPai(node_pai);
+                }
+            }
+            else{
+                if(temFilhoDireito(node)){
+                    node.getFilho_direita().setPai(null);
+                    raiz = node.getFilho_direita();
+                    node.setFilho_direita(null);
+                    node = null;
+                }
+                else{
+                    node.getFilho_esquerda().setPai(null);
+                    raiz = node.getFilho_esquerda();
+                    node.setFilho_esquerda(null);
+                    node = null;
+                }
+            }
+            tamanho--;
+        }
+    }
+
     private void inOrderNos(No node){
         if(noInterno(node) && node.getFilho_esquerda() != null)
             inOrderNos(node.getFilho_esquerda());
