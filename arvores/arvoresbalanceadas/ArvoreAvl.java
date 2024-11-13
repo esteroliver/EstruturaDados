@@ -14,7 +14,7 @@ class ArvoreAvl {
         desbalanceado.setBalanceamento(null);
     }
 
-    private void balancear(No node){
+    private void balancearInsercao(No node){
         No aux = node.getPai();
         if(umFilhoDireita(node)){
                 while(aux != null){
@@ -48,7 +48,6 @@ class ArvoreAvl {
         }
         node.setPai(novo_pai);
         if(node == raiz) raiz = novo_pai;
-        balancear(node);
     }
 
     private void rotacaoDireita(No node){
@@ -63,7 +62,6 @@ class ArvoreAvl {
         }
         node.setPai(novo_pai);
         if(node == raiz) raiz = novo_pai;
-        balancear(node);
     }
 
     public Integer tamanho(){
@@ -173,21 +171,25 @@ class ArvoreAvl {
                 }
             }
             tamanho++;
-            balancear(node);
+            balancearInsercao(node);
         }
 
         if(desbalanceado.getBalanceamento() != null){
             if(desbalanceado.getBalanceamento() == 2){
                 if(desbalanceado.getFilho_esquerda().getBalanceamento() == -1){
                     rotacaoEsquerda(desbalanceado.getFilho_esquerda());
+                    balancearInsercao(desbalanceado.getFilho_esquerda());
                 }
                 rotacaoDireita(desbalanceado);
+                balancearInsercao(desbalanceado);
             }
             else{
                 if(desbalanceado.getFilho_direita().getBalanceamento() == 1){
                     rotacaoDireita(desbalanceado.getFilho_direita());
+                    balancearInsercao(desbalanceado.getFilho_direita());
                 }
                 rotacaoEsquerda(desbalanceado);
+                balancearInsercao(desbalanceado);
             }
             desbalanceado = null;
         }
