@@ -14,6 +14,28 @@ class ArvoreAvl {
         desbalanceado.setBalanceamento(null);
     }
 
+    private void balancear(No node){
+        No aux = node.getPai();
+        if(umFilhoDireita(node)){
+                while(aux != null){
+                    Integer fb = aux.getBalanceamento() - 1;
+                    aux.setBalanceamento(fb);
+                    if(aux.getBalanceamento() == -2 || aux.getBalanceamento() == 2) desbalanceado = aux;
+                    if(aux.getBalanceamento() == 0) break;
+                    aux = aux.getPai();
+                }
+            }
+        else{
+            while(aux != null){
+                Integer fb = aux.getBalanceamento() + 1;
+                aux.setBalanceamento(fb);
+                if(aux.getBalanceamento() == -2 || aux.getBalanceamento() == 2) desbalanceado = aux;
+                if(aux.getBalanceamento() == 0) break;
+                aux = aux.getPai();
+            }
+        }
+    }
+
     private void rotacaoEsquerda(No node){
         No novo_pai = node.getFilho_direita();
         novo_pai.setPai(node.getPai());
@@ -26,6 +48,7 @@ class ArvoreAvl {
         }
         node.setPai(novo_pai);
         if(node == raiz) raiz = novo_pai;
+        balancear(node);
     }
 
     private void rotacaoDireita(No node){
@@ -40,6 +63,7 @@ class ArvoreAvl {
         }
         node.setPai(novo_pai);
         if(node == raiz) raiz = novo_pai;
+        balancear(node);
     }
 
     public Integer tamanho(){
@@ -149,24 +173,7 @@ class ArvoreAvl {
                 }
             }
             tamanho++;
-            if(umFilhoDireita(node)){
-                while(aux != null){
-                    Integer fb = aux.getBalanceamento() - 1;
-                    aux.setBalanceamento(fb);
-                    if(aux.getBalanceamento() == -2 || aux.getBalanceamento() == 2) desbalanceado = aux;
-                    if(aux.getBalanceamento() == 0) break;
-                    aux = aux.getPai();
-                }
-            }
-            else{
-                while(aux != null){
-                    Integer fb = aux.getBalanceamento() + 1;
-                    aux.setBalanceamento(fb);
-                    if(aux.getBalanceamento() == -2 || aux.getBalanceamento() == 2) desbalanceado = aux;
-                    if(aux.getBalanceamento() == 0) break;
-                    aux = aux.getPai();
-                }
-            }
+            balancear(node);
         }
 
         if(desbalanceado.getBalanceamento() != null){
