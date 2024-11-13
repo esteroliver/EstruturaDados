@@ -243,6 +243,31 @@ class ArvoreAvl {
             }
             tamanho--;
         }
+        else{
+            No node_pai = node.getPai();
+            No node_sub;
+            if(!temFilhoEsquerdo(node.getFilho_direita())){
+                node_sub = node.getFilho_direita();
+            }
+            else{
+                noSub(node.getFilho_direita(), node_sub);
+            }
+        }
+    }
+
+    private void noSub(No node, No node_sub){
+        if(noInterno(node) && node.getFilho_esquerda() != null){
+            noSub(node.getFilho_esquerda());
+            return;
+        }
+        if((umFilhoEsquerdo(node) && noExterno(node)) || (umFilhoEsquerdo(node) && temFilhoDireito(node) && !temFilhoEsquerdo(node))){
+            node_sub = node;
+            return;
+        }
+        /*
+        if(isInternal(o) && o.getFilho_direita() != null)
+            leftChildLeaf(o.getFilho_direita());
+         */
     }
 
     private void inOrderNos(No node){
