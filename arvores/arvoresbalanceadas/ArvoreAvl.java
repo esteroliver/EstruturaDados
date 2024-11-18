@@ -36,6 +36,28 @@ class ArvoreAvl {
         }
     }
 
+    private void calcularFbRemocao(No node){
+        No aux = node.getPai();
+        if(umFilhoDireita(node)){
+                while(aux != null){
+                    Integer fb = aux.getBalanceamento() + 1;
+                    aux.setBalanceamento(fb);
+                    if(aux.getBalanceamento() == -2 || aux.getBalanceamento() == 2) desbalanceado = aux;
+                    if(aux.getBalanceamento() != 0) break;
+                    aux = aux.getPai();
+                }
+            }
+        else{
+            while(aux != null){
+                Integer fb = aux.getBalanceamento() - 1;
+                aux.setBalanceamento(fb);
+                if(aux.getBalanceamento() == -2 || aux.getBalanceamento() == 2) desbalanceado = aux;
+                if(aux.getBalanceamento() != 0) break;
+                aux = aux.getPai();
+            }
+        }
+    }
+
     private void rotacaoEsquerda(No node){
         No novo_pai = node.getFilho_direita();
         novo_pai.setPai(node.getPai());
@@ -191,11 +213,12 @@ class ArvoreAvl {
                 rotacaoEsquerda(desbalanceado);
                 calcularFbInsercao(desbalanceado);
             }
-            desbalanceado = null;
+            desbalanceado.setBalanceamento(null);
         }
     }
 
     public void removerNo(No node){
+        calcularFbRemocao(node);
         if(noExterno(node)){
             if(umFilhoEsquerdo(node)) node.getPai().setFilho_esquerda(null);
             else if(umFilhoDireita(node)) node.getPai().setFilho_direita(null);
@@ -244,20 +267,65 @@ class ArvoreAvl {
             tamanho--;
         }
         else{
-            No node_pai = node.getPai();
-            No node_sub;
-            if(!temFilhoEsquerdo(node.getFilho_direita())){
-                node_sub = node.getFilho_direita();
+            if(node != raiz){
+                No node_pai = node.getPai();
+                No node_sub = new No();
+                if(!temFilhoEsquerdo(node.getFilho_direita())){
+                    node_sub = node.getFilho_direita();
+                }
+                else{
+                    noSub(node.getFilho_direita(), node_sub);
+                }
+                node_sub.setPai(node_pai);
+                if(umFilhoDireita(node)){
+                    node_pai.setFilho_direita(node_sub);
+                }
+                else{
+                    node_pai.setFilho_esquerda(node_sub);
+                }
+                node_sub.setFilho_esquerda(node.getFilho_esquerda());
+                node_sub.setFilho_direita(node.getFilho_direita());
             }
             else{
-                noSub(node.getFilho_direita(), node_sub);
+                No node_sub = new No();
+                if(!temFilhoEsquerdo(node.getFilho_direita())){
+                    node_sub = node.getFilho_direita();
+                }
+                else{
+                    noSub(node.getFilho_direita(), node_sub);
+                }
+                node_sub.setPai(null);
+                node_sub.setFilho_esquerda(node.getFilho_esquerda());
+                node_sub.setFilho_direita(node.getFilho_direita());
+                raiz = node_sub;
             }
+            tamanho--;
+        }
+
+        if(desbalanceado.getBalanceamento() != null){
+            if(desbalanceado.getBalanceamento() == 2){
+                if(desbalanceado.getFilho_esquerda().getBalanceamento() == -1){
+                    rotacaoEsquerda(desbalanceado.getFilho_esquerda());
+                    calcularFbRemocao(desbalanceado.getFilho_esquerda());
+                }
+                rotacaoDireita(desbalanceado);
+                calcularFbRemocao(desbalanceado);
+            }
+            else{
+                if(desbalanceado.getFilho_direita().getBalanceamento() == 1){
+                    rotacaoDireita(desbalanceado.getFilho_direita());
+                    calcularFbRemocao(desbalanceado.getFilho_direita());
+                }
+                rotacaoEsquerda(desbalanceado);
+                calcularFbRemocao(desbalanceado);
+            }
+            desbalanceado.setBalanceamento(null);
         }
     }
 
     private void noSub(No node, No node_sub){
         if(noInterno(node) && node.getFilho_esquerda() != null){
-            noSub(node.getFilho_esquerda());
+            noSub(node.getFilho_esquerda(), node_sub);
             return;
         }
         if((umFilhoEsquerdo(node) && noExterno(node)) || (umFilhoEsquerdo(node) && temFilhoDireito(node) && !temFilhoEsquerdo(node))){

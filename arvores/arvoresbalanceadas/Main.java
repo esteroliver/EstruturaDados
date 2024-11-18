@@ -17,5 +17,9 @@ class Main{
         arvore.inserirNo(node6);
 
         arvore.desenharArvore();
+        
+        arvore.removerNo(node2);
+
+        arvore.desenharArvore();
     }
 }
