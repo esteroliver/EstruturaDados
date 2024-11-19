@@ -14,13 +14,13 @@ class Main{
         arvore.inserirNo(node3);
         arvore.inserirNo(node4);
         arvore.inserirNo(node5);
-        arvore.desenharArvore();
         arvore.inserirNo(node6);
-        System.out.println(node1.getBalanceamento());
+        
+        arvore.desenharArvore();
+    
+        arvore.removerNo(node1);
+        System.out.println(arvore.raiz().getFilho_esquerda().getFilho_esquerda().getElemento());
 
         arvore.desenharArvore();
-        //arvore.removerNo(node1);
-
-        
     }
 }

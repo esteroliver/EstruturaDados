@@ -58,7 +58,7 @@ class ArvoreAvl {
         }
     }
 
-    private void rotacaoDireita(No node){
+    private void rotacaoEsquerda(No node){
         No novo_pai = node.getFilho_direita();
         novo_pai.setPai(node.getPai());
         if(novo_pai.getFilho_esquerda() == null)
@@ -71,13 +71,13 @@ class ArvoreAvl {
         node.setPai(novo_pai);
         if(node == raiz) raiz = novo_pai;
         //atualizando FB
-        Integer novo_fb = node.getBalanceamento() - 1 - (Math.max(novo_pai.getBalanceamento(), 0));
+        Integer novo_fb = node.getBalanceamento() + 1 - (Math.min(novo_pai.getBalanceamento(), 0));
         node.setBalanceamento(novo_fb);
-        novo_fb = novo_pai.getBalanceamento() - 1 + (Math.min(node.getBalanceamento(), 0));
+        novo_fb = novo_pai.getBalanceamento() + 1 + (Math.max(node.getBalanceamento(), 0));
         novo_pai.setBalanceamento(novo_fb);
     }
 
-    private void rotacaoEsquerda(No node){
+    private void rotacaoDireita(No node){
         No novo_pai = node.getFilho_esquerda();
         novo_pai.setPai(node.getPai());
         if(novo_pai.getFilho_direita() == null)
@@ -90,9 +90,9 @@ class ArvoreAvl {
         node.setPai(novo_pai);
         if(node == raiz) raiz = novo_pai;
         //atualizando FB
-        Integer novo_fb = node.getBalanceamento() + 1 - (Math.min(novo_pai.getBalanceamento(), 0));
+        Integer novo_fb = node.getBalanceamento() - 1 - (Math.max(novo_pai.getBalanceamento(), 0));
         node.setBalanceamento(novo_fb);
-        novo_fb = novo_pai.getBalanceamento() + 1 + (Math.max(node.getBalanceamento(), 0));
+        novo_fb = novo_pai.getBalanceamento() - 1 + (Math.min(node.getBalanceamento(), 0));
         novo_pai.setBalanceamento(novo_fb);
     }
 
@@ -279,22 +279,21 @@ class ArvoreAvl {
             tamanho--;
         }
         else{
-            if(node != raiz){
+            if(node != raiz){ 
                 No node_pai = node.getPai();
                 No node_sub = new No();
                 if(!temFilhoEsquerdo(node.getFilho_direita())){
                     node_sub = node.getFilho_direita();
-                    if(!temFilhoDireito(node_sub)){
-                        node_sub.setFilho_direita(null);
-                    }
                 }
                 else{
                     noSub(node.getFilho_direita(), node_sub);
                     node_sub.setFilho_direita(node.getFilho_direita());
+                    node.getFilho_direita().setPai(node_sub);
                 } 
                 node_sub.setFilho_esquerda(node.getFilho_esquerda());  
-                //System.out.println(node_sub.getPai().getElemento());
-                calcularFbRemocao(node_sub);
+                node.getFilho_esquerda().setPai(node_sub);
+                if(node != node_sub.getPai())
+                    calcularFbRemocao(node_sub);
                 node_sub.setPai(node_pai);  
                 if(umFilhoDireita(node)){
                     node_pai.setFilho_direita(node_sub);
@@ -302,47 +301,43 @@ class ArvoreAvl {
                 else{
                     node_pai.setFilho_esquerda(node_sub);
                 }
-                
+                calcularFbRemocao(node_sub.getFilho_esquerda());
             }
             else{
                 No node_sub = new No();
                 if(!temFilhoEsquerdo(node.getFilho_direita())){
                     node_sub = node.getFilho_direita();
-                    if(!temFilhoDireito(node_sub)){
-                        node_sub.setFilho_direita(null);
-                    }
                 }
                 else{
                     noSub(node.getFilho_direita(), node_sub);
                     node_sub.setFilho_direita(node.getFilho_direita());
                 }
                 node_sub.setFilho_esquerda(node.getFilho_esquerda());
-                calcularFbRemocao(node_sub);
+                if(node != node_sub.getPai()) calcularFbRemocao(node_sub);
                 node_sub.setPai(null);
                 raiz = node_sub;
+                calcularFbRemocao(node_sub.getFilho_esquerda());
             }
+            
             tamanho--;
         }
-
+        
         if(desbalanceado.getBalanceamento() != null){
             if(desbalanceado.getBalanceamento() == 2){
                 if(desbalanceado.getFilho_esquerda().getBalanceamento() == -1){
                     rotacaoEsquerda(desbalanceado.getFilho_esquerda());
-                    calcularFbRemocao(desbalanceado.getFilho_esquerda());
                 }
                 rotacaoDireita(desbalanceado);
-                calcularFbRemocao(desbalanceado);
             }
             else{
                 if(desbalanceado.getFilho_direita().getBalanceamento() == 1){
                     rotacaoDireita(desbalanceado.getFilho_direita());
-                    calcularFbRemocao(desbalanceado.getFilho_direita());
                 }
                 rotacaoEsquerda(desbalanceado);
-                calcularFbRemocao(desbalanceado);
             }
-            desbalanceado.setBalanceamento(null);
         }
+
+        node = null;
     }
 
     private void noSub(No node, No node_sub){
@@ -354,15 +349,12 @@ class ArvoreAvl {
             node_sub = node;
             return;
         }
-        /*
-        if(isInternal(o) && o.getFilho_direita() != null)
-            leftChildLeaf(o.getFilho_direita());
-         */
     }
 
     private void inOrderNos(No node){
         if(noInterno(node) && node.getFilho_esquerda() != null)
             inOrderNos(node.getFilho_esquerda());
+        //System.out.println(node.getElemento());
         nos.add(node);
         if(noInterno(node) && node.getFilho_direita() != null)
             inOrderNos(node.getFilho_direita());
