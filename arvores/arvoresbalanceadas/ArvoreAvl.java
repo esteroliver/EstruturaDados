@@ -223,18 +223,26 @@ class ArvoreAvl {
     }
 
     public void removerNo(No node){
+        //Nó sem filhos
         if(noExterno(node)){
-            if(umFilhoEsquerdo(node)){
-                node.getPai().setFilho_esquerda(null);
-                calcularFbRemocao(node.getPai());
+            if(node != raiz){
+                if(umFilhoEsquerdo(node)){
+                    node.getPai().setFilho_esquerda(null);
+                    calcularFbRemocao(node);
+                }
+                else if(umFilhoDireita(node)){
+                    node.getPai().setFilho_direita(null);
+                    calcularFbRemocao(node);
+                }
             }
-            else if(umFilhoDireita(node)){
-                node.getPai().setFilho_direita(null);
-                calcularFbRemocao(node.getPai());
+            else{
+                raiz = null;
             }
             node = null;
             tamanho--;
         }
+
+        //Nó com 1 filho
         else if(node.oneChild()){
             No node_pai = node.getPai();
             if(node_pai != null){
@@ -278,6 +286,8 @@ class ArvoreAvl {
             }
             tamanho--;
         }
+
+        //Nó com 2 filhos
         else{
             No node_pai = node.getPai();
             No node_sub = node;
@@ -286,11 +296,15 @@ class ArvoreAvl {
             }
             else{
                 noSub(node.getFilho_direita(), node_sub);
+                if(temFilhoDireito(node_sub)){
+                    node_sub.getPai().setFilho_esquerda(node_sub.getFilho_direita());
+                    node_sub.getFilho_direita().setPai(node_sub.getPai());
+                }
                 node_sub.setFilho_direita(node.getFilho_direita());
-                (node.getFilho_direita()).setPai(node_sub);
+                node.getFilho_direita().setPai(node_sub);
             }
             node_sub.setFilho_esquerda(node.getFilho_esquerda());
-            (node.getFilho_esquerda()).setPai(node_sub);
+            node.getFilho_esquerda().setPai(node_sub);
             if(node != raiz){ 
                 if(umFilhoDireita(node)){
                     node_pai.setFilho_direita(node_sub);
@@ -309,7 +323,6 @@ class ArvoreAvl {
             tamanho--;
         }
             
-        
         if(desbalanceado.getBalanceamento() != null && desbalanceado != node){
             if(desbalanceado.getBalanceamento() == 2){
                 if(desbalanceado.getFilho_esquerda().getBalanceamento() == -1){
