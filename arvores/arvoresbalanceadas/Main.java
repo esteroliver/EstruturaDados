@@ -19,7 +19,6 @@ class Main{
         arvore.desenharArvore();
     
         arvore.removerNo(node1);
-        System.out.println(arvore.raiz().getFilho_esquerda().getFilho_esquerda().getElemento());
 
         arvore.desenharArvore();
     }
