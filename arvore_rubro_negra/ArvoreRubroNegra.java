@@ -27,8 +27,8 @@ public class ArvoreRubroNegra {
                         //pai sendo rubro
                         if(aux.getCor() == Cor.RUBRO){
                             //pai de aux tem dois filhos
+                            No avo = aux.getPai();
                             if(aux.getPai().temDoisFilhos()){
-                                No avo = aux.getPai();
                                 No filho_d_avo = avo.getFilho_direita();
                                 No filho_e_avo = avo.getFilho_esquerda();
                                 filho_d_avo.setCor(Cor.NEGRO);
@@ -38,7 +38,6 @@ public class ArvoreRubroNegra {
                                 }
                             }
                             else{
-                                No avo = aux.getPai();
                                 //rotacao simples a direita
                                 if(avo.getFilho_esquerda() == aux){
                                     No novo_pai = aux;
@@ -59,7 +58,7 @@ public class ArvoreRubroNegra {
                                 }
                                 //rotacao dupla a esquerda
                                 else{
-                                    // o novo nó deve rotacionar para a direita
+                                    // o aux deve rotacionar para a direita
                                     No novo_pai = o;
                                     novo_pai.setPai(avo);
                                     novo_pai.setFilho_direita(aux);
@@ -90,7 +89,55 @@ public class ArvoreRubroNegra {
 
                         //pai sendo rubro
                         if(aux.getCor() == Cor.RUBRO){
-                            
+                            //pai de aux tem dois filhos
+                            No avo = aux.getPai();
+                            if(aux.getPai().temDoisFilhos()){
+                                No filho_d_avo = avo.getFilho_direita();
+                                No filho_e_avo = avo.getFilho_esquerda();
+                                filho_d_avo.setCor(Cor.NEGRO);
+                                filho_e_avo.setCor(Cor.NEGRO);
+                                if(avo != raiz){
+                                    avo.setCor(Cor.RUBRO);
+                                }
+                            }
+                            else{
+                                //rotacao simples a esquerda
+                                if(avo.getFilho_direita() == aux){
+                                    No novo_pai = aux;
+                                    novo_pai.setPai(avo.getPai());
+                                    if(novo_pai.getFilho_esquerda() == null){
+                                        novo_pai.setFilho_esquerda(avo);
+                                    }
+                                    else{
+                                        avo.setFilho_direita(novo_pai.getFilho_esquerda());
+                                        novo_pai.getFilho_esquerda().setPai(avo);
+                                        novo_pai.setFilho_esquerda(avo);
+                                    }
+                                    avo.setPai(novo_pai);
+                                    if(avo == raiz) raiz = novo_pai;
+
+                                    avo.setCor(Cor.RUBRO);
+                                    novo_pai.setCor(Cor.NEGRO);
+                                }
+                                //rotacao dupla a direita
+                                else{
+                                    // o aux vai rotacionar para a esquerda
+                                    No novo_pai = o;
+                                    novo_pai.setPai(avo);
+                                    novo_pai.setFilho_esquerda(aux);
+                                    aux.setPai(novo_pai);
+
+                                    // o avô vai rotacionar para a direita
+                                    novo_pai.setPai(avo.getPai());
+                                    novo_pai.setFilho_direita(avo);
+                                    avo.setPai(novo_pai);
+
+                                    if(avo == raiz) raiz = novo_pai;
+
+                                    novo_pai.setCor(Cor.NEGRO);
+                                    avo.setCor(Cor.RUBRO);
+                                }
+                            }
                         }
                     }
                     else{
