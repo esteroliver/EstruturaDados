@@ -50,4 +50,9 @@ public class No {
     public void setCor(Cor cor) {
         this.cor = cor;
     }
+
+    public Boolean temDoisFilhos(){
+        if(filho_direita != null && filho_esquerda != null) return true;
+        return false;
+    }
 }
