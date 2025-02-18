@@ -37,13 +37,8 @@ public class Main{
     }
 
     public static void bfs(Vertice v){
-        visitados[v.getVertice()] = true;
-        System.out.println(v.getVertice());
-        for(Vertice v_viz : v.getVerticesVizinhos()){
-            if(visitados[v_viz.getVertice()] == null){
-                //TO DO
-            }
-        } 
         
+        //TO DO
+            
     }
 }
