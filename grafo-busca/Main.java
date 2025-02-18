@@ -35,4 +35,15 @@ public class Main{
             if(visitados[v_viz.getVertice()] == null) dfs(v_viz);
         }
     }
+
+    public static void bfs(Vertice v){
+        visitados[v.getVertice()] = true;
+        System.out.println(v.getVertice());
+        for(Vertice v_viz : v.getVerticesVizinhos()){
+            if(visitados[v_viz.getVertice()] == null){
+                //TO DO
+            }
+        } 
+        
+    }
 }
