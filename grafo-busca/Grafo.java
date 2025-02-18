@@ -30,32 +30,3 @@ public class Grafo{
     }
 }
 
-class Vertice{
-    private Integer vertice;
-    private ArrayList<Integer> vertices_vizinhos;
-
-    public Vertice(){
-        vertices_vizinhos = new ArrayList<Integer>();
-    }
-
-    public Vertice(Integer vertice){
-        this.vertice = vertice;
-        vertices_vizinhos = new ArrayList<Integer>();
-    }
-
-    public Integer getVertice(){
-        return vertice;
-    }
-
-    public void setVertice(Integer vertice){
-        this.vertice = vertice;
-    }
-
-    public ArrayList<Integer> getVerticesVizinhos(){
-        return vertices_vizinhos;
-    }
-
-    public void setVerticesVizinhos(ArrayList<Integer> vertices_vizinhos){
-        this.vertices_vizinhos = vertices_vizinhos;
-    }
-}
