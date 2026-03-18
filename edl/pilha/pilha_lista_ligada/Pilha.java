@@ -1,3 +1,8 @@
+package edl.pilha.pilha_lista_ligada;
+
+import edl.pilha.EPilhaVazia;
+import edl.pilha.No;
+
 public class Pilha {
     private int top = 0;
     private No last;
@@ -56,27 +61,4 @@ public class Pilha {
         top--;
         return retorno;
     }
-}
-
-class No{
-    private Object elemento;
-    private No proximo;
-    public Object getElemento(){
-        return elemento;
-    }
-    public void setElemento(Object o){
-        elemento = o;
-    }
-    public No getProximo(){
-        return proximo;
-    }
-    public void setProximo(No n){
-        proximo = n;
-    }
-}
-
-class EPilhaVazia extends RuntimeException {
-	public EPilhaVazia(String err) {
-		super(err);
-	}
 }

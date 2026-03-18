@@ -1,3 +1,7 @@
+package edl.pilha.pilha_array;
+
+import edl.pilha.EPilhaVazia;
+
 class Pilha{
     private Object array[];
     private int top = -1;
@@ -38,10 +42,4 @@ class Pilha{
         top++;
         array[top] = x;
     }
-}
-
-class EPilhaVazia extends RuntimeException {
-	public EPilhaVazia(String err) {
-		super(err);
-	}
 }

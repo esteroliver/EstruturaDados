@@ -1,4 +1,6 @@
-class No {
+package arvoreavl;
+
+public class No {
     private Integer elemento;
     private No pai;
     private No filho_direita;

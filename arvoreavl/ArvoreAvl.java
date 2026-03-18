@@ -1,6 +1,8 @@
+package arvoreavl;
+
 import java.util.ArrayList;
 
-class ArvoreAvl {
+public class ArvoreAvl {
     private No raiz;
     private No desbalanceado;
     private Integer tamanho;

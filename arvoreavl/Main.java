@@ -1,4 +1,6 @@
-class Main{
+package arvoreavl;
+
+public class Main{
     public static void main(String[] args){
         No node1 = new No(20);
         No node2 = new No(30);
