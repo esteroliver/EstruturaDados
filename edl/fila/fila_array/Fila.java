@@ -1,4 +1,8 @@
-class Fila {
+package edl.fila.fila_array;
+
+import edl.fila.EFilaVazia;
+
+public class Fila {
     private int i, f, n;
     private Object dados[];
 
@@ -46,8 +50,3 @@ class Fila {
     }
 }
 
-class EFilaVazia extends RuntimeException {
-	public EFilaVazia(String err) {
-		super(err);
-	}
-}

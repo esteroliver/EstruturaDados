@@ -1,3 +1,4 @@
+package edl.fila.exercicios;
 public class q6 {
     public static void main(String[] args){
         Fila fila_pacientes = new Fila(1);

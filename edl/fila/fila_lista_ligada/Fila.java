@@ -1,8 +1,13 @@
-package fila.fila_ll;
-class Fila{
+package edl.fila.fila_lista_ligada;
+
+import edl.fila.EFilaVazia;
+import edl.fila.No;
+
+public class Fila{
     private int tm;
     private No last;
     private No first;
+
     public Fila(){
         tm = 0;
         this.first = new No(null);
@@ -26,6 +31,7 @@ class Fila{
         last = e;
         tm++;
     }
+
     public Object pop(){
         if(tm == 0) throw new EFilaVazia("Fila vazia.");
         if(first == last){
@@ -41,31 +47,4 @@ class Fila{
         tm--;
         return a;
     }
-}
-
-class No{
-    private Object elemento;
-    private No proximo;
-    public No(Object elemento){
-        this.elemento = elemento;
-        this.proximo = null;
-    }
-    public Object getElemento(){
-        return elemento;
-    }
-    public void setElemento(Object o){
-        elemento = o;
-    }
-    public No getProximo(){
-        return proximo;
-    }
-    public void setProximo(No n){
-        proximo = n;
-    }
-}
-
-class EFilaVazia extends RuntimeException {
-	public EFilaVazia(String err) {
-		super(err);
-	}
 }

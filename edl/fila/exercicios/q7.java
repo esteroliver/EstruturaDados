@@ -1,3 +1,4 @@
+package edl.fila.exercicios;
 class q7 {
     public static void main(String[] args){
         FilaPilha fila = new FilaPilha();

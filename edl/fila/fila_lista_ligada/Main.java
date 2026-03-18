@@ -1,13 +1,14 @@
+package edl.fila.fila_lista_ligada;
 class Main{
     public static void main(String args[]){
-        Fila f = new Fila(1);
+        Fila f = new Fila();
         for(int i = 0; i < 5; i++){
-            f.enfileirar(i+1);
+            f.push(i+1);
         }
         System.out.println(f.tamanho());
-        System.out.println(f.estaVazia());
+        System.out.println(f.estaVazio());
         for(int i = 0; i < 5; i++){
-            Object x = f.desenfileirar();
+            Object x = f.pop();
             System.out.println(x);
         }
     }
