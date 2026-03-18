@@ -1,7 +1,8 @@
-import java.io.EOFException;
-import java.util.List;
+package edl.lista.lista_array;
 
-class Lista {
+import edl.lista.*;
+
+public class Lista {
     private Object[] array;
     private Integer tam;
     public Lista(){
@@ -155,10 +156,4 @@ class Lista {
         }
         return lista;
     }
-}
-
-class EListaVazia extends RuntimeException {
-	public EListaVazia(String err) {
-		super(err);
-	}
 }

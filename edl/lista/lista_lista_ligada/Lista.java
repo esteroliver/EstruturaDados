@@ -1,4 +1,8 @@
-class Lista{
+package edl.lista.lista_lista_ligada;
+
+import edl.lista.No;
+
+public class Lista{
     private No first, last;
     private int tam;
     

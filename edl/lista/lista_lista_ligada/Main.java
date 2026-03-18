@@ -1,3 +1,5 @@
+package edl.lista.lista_lista_ligada;
+
 class Main  {
     public static void main(String[] args){
         Lista l = new Lista();

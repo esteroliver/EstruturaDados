@@ -10,8 +10,7 @@ class Main{
         No node6 = new No(31);
         No node7 = new No(32);
         No node8 = new No(34);
-        No node9 = new No(11);
-        No node10 = new No(16);
+        
         ArvoreBinaria arvore = new ArvoreBinaria(node1);
         arvore.insertNode(node2);
         arvore.insertNode(node3);

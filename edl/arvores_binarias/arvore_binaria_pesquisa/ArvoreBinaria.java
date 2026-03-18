@@ -255,7 +255,7 @@ class ArvoreBinaria {
         }
         for(int i = 0; i <= altura; i++){
             for(int j = 0; j < size(); j++){
-                Integer print;
+
                 if(matriz[i][j] == null)
                     System.out.print(" ");
                 
