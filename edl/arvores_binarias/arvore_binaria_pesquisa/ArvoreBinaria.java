@@ -1,3 +1,5 @@
+package edl.arvores_binarias.arvore_binaria_pesquisa;
+
 import java.util.ArrayList;
 
 class ArvoreBinaria {

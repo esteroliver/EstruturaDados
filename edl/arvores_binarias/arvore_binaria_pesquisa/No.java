@@ -1,3 +1,5 @@
+package edl.arvores_binarias.arvore_binaria_pesquisa;
+
 class No {
     private Integer elemento;
     private No pai;

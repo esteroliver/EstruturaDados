@@ -1,4 +1,4 @@
-package arvoreavl;
+package arvore_avl;
 
 public class No {
     private Integer elemento;

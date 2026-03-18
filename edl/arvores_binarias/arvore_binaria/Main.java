@@ -1,3 +1,5 @@
+package edl.arvores_binarias.arvore_binaria;
+
 public class Main {
     public static void main(String[] args){
         ArvoreBinaria arvore = new ArvoreBinaria();

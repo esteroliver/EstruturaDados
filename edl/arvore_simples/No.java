@@ -1,3 +1,4 @@
+package edl.arvore_simples;
 import java.util.ArrayList;
 
 public class No {

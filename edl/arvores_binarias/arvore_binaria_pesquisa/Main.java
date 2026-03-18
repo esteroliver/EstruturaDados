@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package edl.arvores_binarias.arvore_binaria_pesquisa;
+
 class Main{
     public static void main(String[] args){
         No node1 = new No(20);

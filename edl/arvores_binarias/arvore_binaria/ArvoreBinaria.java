@@ -1,3 +1,5 @@
+package edl.arvores_binarias.arvore_binaria;
+
 public class ArvoreBinaria{
     private Integer tam;
     private Integer[] array;
