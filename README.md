@@ -33,3 +33,5 @@ Implementações realizadas nas disciplinas Estrutura de Dados Lineares (3° per
 - [Heap](heap/MinHeap.java)
 
 ## Estrutura de dados não-lineares (4° período)
+
+- [Árvore AVL](arvoreavl/ArvoreAvl.java)
