@@ -1,17 +1,17 @@
 package edl.pilha.pilha_lista_ligada;
 
 import edl.pilha.EPilhaVazia;
-import edl.pilha.No;
+import edl.NoDuplo;
 
 public class Pilha {
     private int top = 0;
-    private No last;
-    private No first;
+    private NoDuplo last;
+    private NoDuplo first;
     public Pilha(){
         top = 0;
-        this.first = new No();
+        this.first = new NoDuplo();
         this.first.setElemento(null);
-        this.last = new No();
+        this.last = new NoDuplo();
         this.last.setElemento(null);
     }
     public boolean estaVazio(){
@@ -22,7 +22,7 @@ public class Pilha {
         return top;
     }
     public void push(Object x){
-        No e = new No();
+        NoDuplo e = new NoDuplo();
         e.setElemento(x);
         e.setProximo(null);
         if(top == 0){
@@ -49,7 +49,7 @@ public class Pilha {
             last.setProximo(null);
             return elemento;
         }
-        No apagar = new No();
+        NoDuplo apagar = new NoDuplo();
         apagar = first;
         while(apagar.getProximo() != last){
             apagar = apagar.getProximo();

@@ -1,30 +1,37 @@
-package edl.lista;
+public class NoDuplo {
 
-public class No{
     private Object elemento;
-    private No proximo;
-    private No anterior;
-    public No(Object elemento){
+    private NoDuplo proximo;
+    private NoDuplo anterior;
+
+    public NoDuplo(Object elemento){
         this.elemento = elemento;
         this.proximo = null;
         this.anterior = null;
     }
+
     public Object getElemento(){
         return elemento;
     }
+
     public void setElemento(Object o){
         elemento = o;
     }
-    public No getProximo(){
+
+    public NoDuplo getProximo(){
         return proximo;
     }
-    public void setProximo(No n){
+
+    public void setProximo(NoDuplo n){
         proximo = n;
     }
-    public No getAnterior(){
+
+    public NoDuplo getAnterior(){
         return anterior;
     }
-    public void setAnterior(No n){
+
+    public void setAnterior(NoDuplo n){
         anterior = n;
     }
+    
 }

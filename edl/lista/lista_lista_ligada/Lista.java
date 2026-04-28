@@ -1,9 +1,9 @@
 package edl.lista.lista_lista_ligada;
 
-import edl.lista.No;
+import edl.NoDuplo;
 
 public class Lista{
-    private No first, last;
+    private NoDuplo first, last;
     private int tam;
     
     public Lista(){
@@ -35,7 +35,7 @@ public class Lista{
         throw new EListaVazia("Lista vazia.");
      }
      public Object before(Object o){
-        No aux;
+        NoDuplo aux;
         aux = first;
         while(aux.getElemento() != o){
             aux = aux.getProximo();
@@ -46,7 +46,7 @@ public class Lista{
         throw new EListaVazia("Elemento não está na lista.");
      }
      public Object after(Object o){
-        No aux;
+        NoDuplo aux;
         aux = first;
         while(aux.getElemento() != o){
             aux = aux.getProximo();
@@ -57,7 +57,7 @@ public class Lista{
         throw new EListaVazia("Elemento não está na lista.");
      }
      public void insertFirst(Object o){
-        No novo_no = new No(o);
+        NoDuplo novo_no = new NoDuplo(o);
         if(tam > 0){
             first.setAnterior(novo_no);
             novo_no.setProximo(first);
@@ -69,7 +69,7 @@ public class Lista{
         tam++;
      }
      public void insertLast(Object o){
-        No novo_no = new No(o);
+        NoDuplo novo_no = new No(o);
         if(tam > 0){
             last.setProximo(novo_no);
             novo_no.setAnterior(last);
@@ -81,16 +81,16 @@ public class Lista{
         tam++;
      }
      //insertBefore e insertAfter só adicionam se o objeto O não for o primeiro nem o último
-     //devo implementar para que adicione no início e no final também?
+     //devo implementar para que adicione NoDuplo início e NoDuplo final também?
      public void insertBefore(Object o, Object p){
-        No novo_no = new No(p);
-        No aux1;
+        NoDuplo novo_no = new No(p);
+        NoDuplo aux1;
         aux1 = first;
         while(aux1.getElemento() != o){
             aux1 = aux1.getProximo();
         }
         if(aux1 != null){
-            No aux2;
+            NoDuplo aux2;
             aux2 = aux1.getAnterior();
             aux2.setProximo(novo_no);
             novo_no.setAnterior(aux2);
@@ -100,14 +100,14 @@ public class Lista{
         }
      }
      public void insertAfter(Object o, Object p){
-        No novo_no = new No(p);
-        No aux1;
+        NoDuplo novo_no = new No(p);
+        NoDuplo aux1;
         aux1 = first;
         while(aux1.getElemento() != o){
             aux1 = aux1.getProximo();
         }
         if(aux1 != null){
-            No aux2;
+            NoDuplo aux2;
             aux2 = aux1.getProximo();
             aux1.setProximo(novo_no);
             novo_no.setAnterior(aux1);
@@ -117,7 +117,7 @@ public class Lista{
         }
      }
      public void replaceElement(Object o, Object p){
-        No aux;
+        NoDuplo aux;
         aux = first;
         while(aux.getElemento() != o){
             aux = aux.getProximo();
@@ -125,8 +125,8 @@ public class Lista{
         if(aux != null) aux.setElemento(p);
      }
      public void swapElements(Object p, Object q){
-        No aux1;
-        No aux2;
+        NoDuplo aux1;
+        NoDuplo aux2;
         aux1 = first;
         aux2 = first;
         while(aux1.getElemento() != p){
@@ -142,27 +142,27 @@ public class Lista{
         }
      }
      public void remove(Object o){
-        No aux;
+        NoDuplo aux;
         aux = first;
         while(aux.getElemento() != o){
             aux = aux.getProximo();
         }
         if(aux != null){
             if(aux != first && aux != last){
-                No aux1;
+                NoDuplo aux1;
                 aux1 = aux.getAnterior();
-                No aux2;
+                NoDuplo aux2;
                 aux2 = aux.getProximo();
                 aux1.setProximo(aux2);
                 aux2.setAnterior(aux1);
             }
             else if(aux == first){
-                No aux1;
+                NoDuplo aux1;
                 aux1 = aux.getProximo();
                 first = aux1;
             }
             else if(aux == last){
-                No aux1;
+                NoDuplo aux1;
                 aux1 = aux.getAnterior();
                 last = aux1;
             }
@@ -171,8 +171,3 @@ public class Lista{
      }
 }
 
-class EListaVazia extends RuntimeException {
-	public EListaVazia(String err) {
-		super(err);
-	}
-}

@@ -1,4 +1,6 @@
-class Vetor{
+package edl.vetor.vetor_array;
+
+public class Vetor{
     private Object[] array;
     private int tam = 0;
     public Vetor(){
@@ -64,8 +66,3 @@ class Vetor{
     }
 }
 
-class EForaIndice extends RuntimeException{
-    public EForaIndice(String err) {
-		super(err);
-	}
-}

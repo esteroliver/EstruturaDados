@@ -1,5 +1,10 @@
-class Vetor{
-    private No first, last;
+package edl.vetor.vetor_lista_ligada;
+
+import edl.NoDuplo;
+import edl.vetor.EForaIndice;
+
+public class Vetor{
+    private NoDuplo first, last;
     private int tam;
     /**
      * TODO
@@ -26,24 +31,24 @@ class Vetor{
 
     public void insertAtRank(Integer i, Object o){
         if(tam == 0 && i == 0){
-            No novo_no = new No(o);
+            NoDuplo novo_no = new NoDuplo(o);
             first = novo_no;
             last = novo_no;
         }
         else if(i == 0){
-            No novo_no = new No(o);
+            NoDuplo novo_no = new NoDuplo(o);
             novo_no.setProximo(first);
             first.setAnterior(novo_no);
             first = novo_no;
         }
-        else if(i < tam){ //inserir no meio
-            No novo_no = new No(o);
-        
-            No aux = first;
+        else if(i < tam){ //inserir NoDuplo meio
+            NoDuplo novo_no = new NoDuplo(o);
+
+            NoDuplo aux = first;
             for(int j = 0; j < i; j++){
                 aux = aux.getProximo();
             }
-            No aux_a = aux.getAnterior(); 
+            NoDuplo aux_a = aux.getAnterior(); 
 
             aux_a.setProximo(novo_no);
             novo_no.setAnterior(aux_a);
@@ -54,7 +59,7 @@ class Vetor{
             if(i == 0) first = novo_no;
         }
         else if(i == tam){
-            No novo_no = new No(o);
+            NoDuplo novo_no = new NoDuplo(o);
 
             last.setProximo(novo_no);
             novo_no.setAnterior(last);
@@ -66,15 +71,15 @@ class Vetor{
 
     public Object removeAtRank(Integer i){
         if(i < tam && tam != 0){
-            No remove = new No(null); 
+            NoDuplo remove = new NoDuplo(null); 
             remove = first;
             for(int j = 0; j < i; j++){
                 remove = remove.getProximo();
             }
             Object elem = remove.getElemento();
-            No aux1 = new No(null);
+            NoDuplo aux1 = new NoDuplo(null);
             aux1 = remove.getAnterior();
-            No aux2 = new No(null);
+            NoDuplo aux2 = new NoDuplo(null);
             aux2 = remove.getProximo();
             aux1.setProximo(aux2);
             aux2.setAnterior(aux1);
@@ -87,7 +92,7 @@ class Vetor{
     public Object elemAtRank(Integer i){
         if(i == 0) return first.getElemento();
         else if( i < tam){
-            No aux = first;
+            NoDuplo aux = first;
             for(int j = 0; j < i; j++){
                 aux = aux.getProximo();
             }
@@ -98,7 +103,7 @@ class Vetor{
 
     public Object replaceAtRank(Integer i, Object o){
         if(i >= tam) throw new EForaIndice("Fora do índice da lista.");
-        No aux = first;
+        NoDuplo aux = first;
         for(int j = 0; j < i; j++)
             aux = aux.getProximo();
         Object elem = aux.getElemento();

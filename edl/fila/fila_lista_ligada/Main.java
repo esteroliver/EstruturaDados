@@ -1,5 +1,6 @@
 package edl.fila.fila_lista_ligada;
-class Main{
+
+public class Main{
     public static void main(String args[]){
         Fila f = new Fila();
         for(int i = 0; i < 5; i++){

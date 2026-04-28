@@ -1,17 +1,17 @@
 package edl.fila.fila_lista_ligada;
 
 import edl.fila.EFilaVazia;
-import edl.fila.No;
+import edl.NoSimples;
 
 public class Fila{
     private int tm;
-    private No last;
-    private No first;
+    private NoSimples last;
+    private NoSimples first;
 
     public Fila(){
         tm = 0;
-        this.first = new No(null);
-        this.last = new No(null);
+        this.first = new NoSimples(null);
+        this.last = new NoSimples(null);
     }
     public boolean estaVazio(){
         if(tm == 0) return true;
@@ -21,7 +21,7 @@ public class Fila{
         return tm;
     }
     public void push(Object x){
-        No e = new No(x);
+        NoSimples e = new NoSimples(x);
         if(tm == 0){
             first = e;
         }

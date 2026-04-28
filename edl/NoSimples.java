@@ -1,18 +1,21 @@
-package edl.pilha;
+public class NoSimples {
 
-public class No{
     private Object elemento;
-    private No proximo;
+    private NoSimples proximo;
+
     public Object getElemento(){
         return elemento;
     }
+
     public void setElemento(Object o){
         elemento = o;
     }
-    public No getProximo(){
+
+    public NoSimples getProximo(){
         return proximo;
     }
-    public void setProximo(No n){
+    
+    public void setProximo(NoSimples n){
         proximo = n;
     }
 }
